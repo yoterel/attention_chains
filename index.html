@@ -50,13 +50,13 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Attention (as-discrete time Markov) Chains</h1>
+            <h1 class="title is-2 publication-title">Attention <em>(as discrete-time Markov)</em> Chains</h1>
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
-                <a href="https://yoterel.github.io/" target="_blank">Yotam Erel</a><sup>1</sup>,</span>
+                <a href="https://yoterel.github.io/" target="_blank">Yotam Erel*</a><sup>1</sup>,</span>
               <span class="author-block">
-                <a href="https://people.mpi-inf.mpg.de/~oduenkel/" target="_blank">Olaf Dünkel</a><sup>2</sup>,</span>
+                <a href="https://people.mpi-inf.mpg.de/~oduenkel/" target="_blank">Olaf Dünkel*</a><sup>2</sup>,</span>
               <span class="author-block">
                 <a href="https://rishabhdabral.github.io/" target="_blank">Rishabh Dabral</a><sup>2</sup>,</span>
               <span class="author-block">
@@ -69,7 +69,9 @@
                 <a href="https://www.cs.tau.ac.il/~amberman/" target="_blank">Amit H. Bermano</a><sup>1</sup>
               </span>
             </div>
-
+			<div>
+			*Denotes equal contribution
+			</div>
             <div class="is-size-5 publication-authors">
               <span class="author-block"><sup>1</sup>Tel Aviv University <sup>2</sup>MPI for Informatics</span>
               <!--<span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>-->
@@ -142,7 +144,7 @@
               Metastable states and their prevalence can be easily computed through simple matrix multiplication and
               eigenanalysis, respectively.
               Using these lightweight tools, we demonstrate state-of-the-art zero-shot segmentation.
-              Lastly, we define <em>TokenRank</em>---the steady state vector of the Markov chain, which measures global
+              Lastly, we define <em>TokenRank</em>&mdash;the steady state vector of the Markov chain, which measures global
               token importance.
               We demonstrate that using it brings improvements in unconditional image generation.
               We believe our framework offers a fresh view of how tokens are being attended in modern visual
@@ -154,34 +156,25 @@
     </div>
   </section>
   <!-- End paper abstract -->
-
   <section class="section hero is-small">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column is-full">
           <div class="content">
-            <h2 class="title is-3">Core Idea</h2>
-            <img src="static/images/intuition.png" alt="spaceshooter" class="center-image" />
+            <h2 class="title is-3">Toy Example</h2>
+            <img src="static/images/intuition.png" alt="intuition" class="center-image" />
             <div class="level-set has-text-justified">
               <p>
                 <b>Left:</b>
-                Attention matrix $A$ with sequence length 5.
+                Attention matrix <b>A</b> with sequence length 5.
                 <b>Middle:</b>
-                A DTMC with transition probabilities defined by matrix $A$, where only strong connections are shown.
+                A DTMC with transition probabilities defined by matrix <b>A</b>, where only strong connections are shown.
                 <b>Right (One-Hot):</b>
-                To evaluate where <em>state-4</em> attends to, we can iterate using the power method once starting from
+                To evaluate where <em>state-4</em> attends to, we can iterate using the <em>power method</em> once starting from
                 a one-hot vector (n=0), which results in the row-select operation (n=1).
                 However, this first-order approximation is insufficient since state-0 mostly transitions to
                 <em>state-3</em> and, therefore, <em>state-4</em> indirectly attends state-3.
                 This becomes evident as we iterate further (n=2).
-                %However, this first-order approximation is insufficient:
-                %As we iterate further (n=2), it becomes visible that state-4 indirectly attends state-3 since state-0
-                mostly transitions to state-3.
-                %To compute where state-4 attends to, starting from a one-hot vector (n=0) we can apply the power
-                method once, yielding the row-select operation (n=1) with probability density shared mostly between
-                state-0 and state-4.
-                %Note, that since state-0 transitions mostly to state-3, then this first-order approximation is
-                inaccurate, since state-4 indirectly attends state-3 as well (n=2).
                 <b>Right (Uniform):</b>
                 To compute a global token ranking, we can iterate starting from a uniform state (n=0), resulting in a
                 per-column sum operation (n=1). This indicates <em>state-0</em> as most important because many states
@@ -190,7 +183,7 @@
                 <em>state-4</em> with high probability.
                 Therefore, the importance of <em>state-4</em> should be elevated.
                 When considering the second bounce (n=2), more probability mass is directed into <em>state-3</em>, and
-                with a sufficient number of iterations the steady state (v^T_{ss}) ranks <em>state-4</em> as the
+                with a sufficient number of iterations the steady state ranks <em>state-4</em> as the
                 most
                 important state globally, which aligns with the intuition above.
               </p>
@@ -202,8 +195,42 @@
       </div>
     </div>
   </section>
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full">
+		<div class="content">
+          <h2 class="title is-3">Applications</h2>
+          <div class="content has-text-justified">
+            <p>
+              To support the usefullness of our framework, we show improvement in various downstream tasks such as zero-shot segmentation, and unconditional image generation.
+            </p>
 
-
+          </div>
+		  <img src="static/images/zero_shot.png" alt="zero_shot" class="center-image" />
+        </div>
+		</div>
+      </div>
+    </div>
+  </section>
+	<section class="section hero is-small">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full">
+          <div class="content">
+            <h2 class="title is-3">TokenRank</h2>
+            <div class="level-set has-text-justified">
+              <p>
+                TokenRank is the unique steady-state vector of the attention matrix, which can be used for visualizations and global understanding of both incoming and outgoing attention.
+				It can serve as a standard tool for visualizing self-attention.
+              </p>
+            </div>
+			<img src="static/images/tokenrank.png" alt="tokenrank" class="center-image" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
   <!--BibTex citation -->
