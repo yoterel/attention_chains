@@ -69,9 +69,9 @@
                 <a href="https://www.cs.tau.ac.il/~amberman/" target="_blank">Amit H. Bermano</a><sup>1</sup>
               </span>
             </div>
-			<div>
-			*Denotes equal contribution
-			</div>
+            <div>
+              *Denotes equal contribution
+            </div>
             <div class="is-size-5 publication-authors">
               <span class="author-block"><sup>1</sup>Tel Aviv University <sup>2</sup>MPI for Informatics</span>
               <!--<span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>-->
@@ -102,11 +102,12 @@
 
                 <!-- Github link -->
                 <span class="link-block">
-                  <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://github.com/yoterel/attention_chains" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
-                    <span>Code (Coming Soon)</span>
+                    <span>Code</span>
                   </a>
                 </span>
                 <!-- ArXiv abstract Link -->
@@ -144,7 +145,8 @@
               Metastable states and their prevalence can be easily computed through simple matrix multiplication and
               eigenanalysis, respectively.
               Using these lightweight tools, we demonstrate state-of-the-art zero-shot segmentation.
-              Lastly, we define <em>TokenRank</em>&mdash;the steady state vector of the Markov chain, which measures global
+              Lastly, we define <em>TokenRank</em>&mdash;the steady state vector of the Markov chain, which measures
+              global
               token importance.
               We demonstrate that using it brings improvements in unconditional image generation.
               We believe our framework offers a fresh view of how tokens are being attended in modern visual
@@ -168,9 +170,11 @@
                 <b>Left:</b>
                 Attention matrix <b>A</b> with sequence length 5.
                 <b>Middle:</b>
-                A DTMC with transition probabilities defined by matrix <b>A</b>, where only strong connections are shown.
+                A DTMC with transition probabilities defined by matrix <b>A</b>, where only strong connections are
+                shown.
                 <b>Right (One-Hot):</b>
-                To evaluate where <em>state-4</em> attends to, we can iterate using the <em>power method</em> once starting from
+                To evaluate where <em>state-4</em> attends to, we can iterate using the <em>power method</em> once
+                starting from
                 a one-hot vector (n=0), which results in the row-select operation (n=1).
                 However, this first-order approximation is insufficient since state-0 mostly transitions to
                 <em>state-3</em> and, therefore, <em>state-4</em> indirectly attends state-3.
@@ -199,21 +203,22 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column is-full">
-		<div class="content">
-          <h2 class="title is-3">Applications</h2>
-          <div class="content has-text-justified">
-            <p>
-              To support the usefullness of our framework, we show improvement in various downstream tasks such as zero-shot segmentation, and unconditional image generation.
-            </p>
+          <div class="content">
+            <h2 class="title is-3">Applications</h2>
+            <div class="content has-text-justified">
+              <p>
+                To support the usefullness of our framework, we show improvement in various downstream tasks such as
+                zero-shot segmentation, and unconditional image generation.
+              </p>
 
+            </div>
+            <img src="static/images/zero_shot.png" alt="zero_shot" class="center-image" />
           </div>
-		  <img src="static/images/zero_shot.png" alt="zero_shot" class="center-image" />
         </div>
-		</div>
       </div>
     </div>
   </section>
-	<section class="section hero is-small">
+  <section class="section hero is-small">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column is-full">
@@ -221,11 +226,12 @@
             <h2 class="title is-3">TokenRank</h2>
             <div class="level-set has-text-justified">
               <p>
-                TokenRank is the unique steady-state vector of the attention matrix, which can be used for visualizations and global understanding of both incoming and outgoing attention.
-				It can serve as a standard tool for visualizing self-attention.
+                TokenRank is the unique steady-state vector of the attention matrix, which can be used for
+                visualizations and global understanding of both incoming and outgoing attention.
+                It can serve as a standard tool for visualizing self-attention.
               </p>
             </div>
-			<img src="static/images/tokenrank.png" alt="tokenrank" class="center-image" />
+            <img src="static/images/tokenrank.png" alt="tokenrank" class="center-image" />
           </div>
         </div>
       </div>
