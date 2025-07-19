@@ -130,16 +130,16 @@
   <section class="section hero is-light">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
-            <!--
+        <!--
             <video controls controls autoplay muted  width="100%">
             <source src="static/videos/ac_teaser.mp4" type="video/mp4">
             Your browser does not support the video tag.
             </video>
             -->
-            <video controls controls autoplay muted  width="100%">
-            <source src="static/videos/ac_method.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-            </video>
+        <video controls controls autoplay muted width="100%">
+          <source src="static/videos/ac_method.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
     </div>
   </section>
@@ -180,8 +180,8 @@
       <div class="columns is-centered">
         <div class="column is-full">
           <div class="content">
-            <h2 class="title is-3">Method</h2>
-            
+            <h2 class="title is-3">In A Nutshell</h2>
+
             <!--
             <video controls controls autoplay muted  width="100%">
             <source src="static/videos/ac_method.mp4" type="video/mp4">
@@ -190,32 +190,14 @@
             -->
 
 
-            <img src="static/images/intuition.png" alt="intuition" class="center-image" />
+            <img src="static/images/intuition_1.png" alt="intuition" class="center-image" />
             <div class="level-set has-text-justified">
               <p>
                 <b>Left:</b>
                 Attention matrix <b>A</b> with sequence length 5.
-                <b>Middle:</b>
+                <b>Right:</b>
                 A DTMC with transition probabilities defined by matrix <b>A</b>, where only strong connections are
-                shown.
-                <b>Right (One-Hot):</b>
-                To evaluate where <em>state-4</em> attends to, we can iterate using the <em>power method</em> once
-                starting from
-                a one-hot vector (n=0), which results in the row-select operation (n=1).
-                However, this first-order approximation is insufficient since state-0 mostly transitions to
-                <em>state-3</em> and, therefore, <em>state-4</em> indirectly attends state-3.
-                This becomes evident as we iterate further (n=2).
-                <b>Right (Uniform):</b>
-                To compute a global token ranking, we can iterate starting from a uniform state (n=0), resulting in a
-                per-column sum operation (n=1). This indicates <em>state-0</em> as most important because many states
-                have a high probability of transitioning into <em>state-0</em>.
-                However, <em>state-0</em> maps to <em>state-3</em> with high probability, and <em>state-3</em> maps to
-                <em>state-4</em> with high probability.
-                Therefore, the importance of <em>state-4</em> should be elevated.
-                When considering the second bounce (n=2), more probability mass is directed into <em>state-3</em>, and
-                with a sufficient number of iterations the steady state ranks <em>state-4</em> as the
-                most
-                important state globally, which aligns with the intuition above.
+                shown. Our framework analyzes the attention matrix from a markovian chain perspective.
               </p>
               <br>
             </div>
@@ -233,12 +215,60 @@
             <h2 class="title is-3">Applications</h2>
             <div class="content has-text-justified">
               <p>
-                To support the usefullness of our framework, we show improvement in various downstream tasks such as
-                zero-shot segmentation, and unconditional image generation.
+                We show our framework improves various downstream tasks such as
+                zero-shot segmentation, and unconditional image generation. In this example, we "bounce" from the token
+                representing the class name in ImageNet. Column Select is the common approach of selecting the whole
+                column from the attention matrix and reshaping it.
               </p>
 
             </div>
-            <img src="static/images/zero_shot.png" alt="zero_shot" class="center-image" />
+            <table cellspacing="0" cellpadding="2" style="border-collapse: collapse; text-align: center;">
+              <tr>
+                <th rowspan="2" style="font-weight: bold;">Original Image</th>
+                <th colspan="2" style="font-weight: bold;">Column Select</th>
+                <th colspan="2" style="font-weight: bold;">Ours</th>
+                <th rowspan="2" style="font-weight: bold;">Ground Truth</th>
+              </tr>
+              <tr>
+                <th style="font-weight: bold;">Raw Scores</th>
+                <th style="font-weight: bold;">Mask</th>
+                <th style="font-weight: bold;">Raw Scores</th>
+                <th style="font-weight: bold;">Mask</th>
+              </tr>
+              <tr>
+                <td><img src="static/images/zero_shot/car/00000.png" width="100"></td>
+                <td><img src="static/images/zero_shot/car/00003.png" width="100"></td>
+                <td><img src="static/images/zero_shot/car/00002.png" width="100"></td>
+                <td><img src="static/images/zero_shot/car/00003_1.png" width="100"></td>
+                <td><img src="static/images/zero_shot/car/00002_1.png" width="100"></td>
+                <td><img src="static/images/zero_shot/car/00004.png" width="100"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/zero_shot/horse/00000.png" width="100"></td>
+                <td><img src="static/images/zero_shot/horse/00003.png" width="100"></td>
+                <td><img src="static/images/zero_shot/horse/00002.png" width="100"></td>
+                <td><img src="static/images/zero_shot/horse/00003_1.png" width="100"></td>
+                <td><img src="static/images/zero_shot/horse/00002_1.png" width="100"></td>
+                <td><img src="static/images/zero_shot/horse/00004.png" width="100"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/zero_shot/laptop/00000.png" width="100"></td>
+                <td><img src="static/images/zero_shot/laptop/00003.png" width="100"></td>
+                <td><img src="static/images/zero_shot/laptop/00002.png" width="100"></td>
+                <td><img src="static/images/zero_shot/laptop/00003_1.png" width="100"></td>
+                <td><img src="static/images/zero_shot/laptop/00002_1.png" width="100"></td>
+                <td><img src="static/images/zero_shot/laptop/00004.png" width="100"></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/zero_shot/airplane/00000.png" width="100"></td>
+                <td><img src="static/images/zero_shot/airplane/00003.png" width="100"></td>
+                <td><img src="static/images/zero_shot/airplane/00002.png" width="100"></td>
+                <td><img src="static/images/zero_shot/airplane/00003_1.png" width="100"></td>
+                <td><img src="static/images/zero_shot/airplane/00002_1.png" width="100"></td>
+                <td><img src="static/images/zero_shot/airplane/00004.png" width="100"></td>
+              </tr>
+            </table>
+
           </div>
         </div>
       </div>
@@ -264,13 +294,18 @@
                 <!-- Column Titles -->
                 <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
                   <span style="font-weight: bold; margin-bottom: 0.5rem;">Image</span>
-                  <img src="static/images/0_ILSVRC2012_val_00005598.png" alt="ILSVRC2012_val_00005598" style="height:200px; width:auto; object-fit:contain;">
-                  <img src="static/images/3_n03345487_fire_engine.png" alt="n03345487_fire_engine" style="height:200px; width:auto; object-fit:contain; margin-top:1rem;">
+                  <img src="static/images/0_ILSVRC2012_val_00005598.png" alt="ILSVRC2012_val_00005598"
+                    style="height:200px; width:auto; object-fit:contain;">
+                  <img src="static/images/3_n03345487_fire_engine.png" alt="n03345487_fire_engine"
+                    style="height:200px; width:auto; object-fit:contain; margin-top:1rem;">
                 </div>
                 <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
                   <span style="font-weight: bold; margin-bottom: 0.5rem;">Bouncing</span>
-                  <img src="static/videos/ILSVRC2012_val_00005598_L_4_H_0_T_1834_2.gif" alt="ILSVRC2012_val_00005598 TokenRank" style="height:200px; width:auto; object-fit:contain;">
-                  <img src="static/videos/n03345487_fire_engine_L_8_H_3_T_1834_2.gif" alt="n03345487_fire_engine TokenRank" style="height:200px; width:auto; object-fit:contain; margin-top:1rem;">
+                  <img src="static/videos/ILSVRC2012_val_00005598_L_4_H_0_T_1834_2.gif"
+                    alt="ILSVRC2012_val_00005598 TokenRank" style="height:200px; width:auto; object-fit:contain;">
+                  <img src="static/videos/n03345487_fire_engine_L_8_H_3_T_1834_2.gif"
+                    alt="n03345487_fire_engine TokenRank"
+                    style="height:200px; width:auto; object-fit:contain; margin-top:1rem;">
                 </div>
               </div>
             </div>
