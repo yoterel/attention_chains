@@ -278,39 +278,83 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column is-full">
-          <div class="content">
+            <div class="content">
             <h2 class="title is-3">TokenRank</h2>
             <div class="level-set has-text-justified">
               <p>
-                TokenRank is the unique steady-state vector of the attention matrix, which can be used for
-                visualizations and global understanding of both incoming and outgoing attention.
-                It can serve as a standard tool for visualizing self-attention.
+              TokenRank is the unique steady-state vector of the attention matrix, which can be used for
+              visualizations and global understanding of both incoming and outgoing attention.
+              It can serve as a standard tool for visualizing self-attention.
+              Below, we visualize the propagation along the Markov chain for examplary images, layers, and heads for three initial states.
+              TokenRank is reached once the Markov chain has converged.
               </p>
             </div>
             <br>
             <!--<img src="static/images/tokenrank.png" alt="tokenrank" class="center-image" />-->
             <div style="display: flex; flex-direction: column; align-items: center;">
-              <div style="display: flex; justify-content: center; gap: 2rem; width: 60%;">
-                <!-- Column Titles -->
-                <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
-                  <span style="font-weight: bold; margin-bottom: 0.5rem;">Image</span>
-                  <img src="static/images/0_ILSVRC2012_val_00005598.png" alt="ILSVRC2012_val_00005598"
-                    style="height:200px; width:auto; object-fit:contain;">
-                  <img src="static/images/3_n03345487_fire_engine.png" alt="n03345487_fire_engine"
-                    style="height:200px; width:auto; object-fit:contain; margin-top:1rem;">
-                </div>
-                <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
-                  <span style="font-weight: bold; margin-bottom: 0.5rem;">Bouncing</span>
-                  <img src="static/videos/ILSVRC2012_val_00005598_L_4_H_0_T_1834_2.gif"
-                    alt="ILSVRC2012_val_00005598 TokenRank" style="height:200px; width:auto; object-fit:contain;">
-                  <img src="static/videos/n03345487_fire_engine_L_8_H_3_T_1834_2.gif"
-                    alt="n03345487_fire_engine TokenRank"
-                    style="height:200px; width:auto; object-fit:contain; margin-top:1rem;">
-                </div>
+              <div style="display: flex; justify-content: center; gap: 2rem; width: 100%;">
+              <!-- Column Titles -->
+              <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+                <span style="font-weight: bold; margin-bottom: 0.5rem;">Image</span>
+                <img src="static/images/0_ILSVRC2012_val_00005598.png" alt="ILSVRC2012_val_00005598"
+                style="height:200px; width:auto; object-fit:contain;">
+                <img src="static/images/3_n03345487_fire_engine.png" alt="n03345487_fire_engine"
+                style="height:200px; width:auto; object-fit:contain; margin-top:1rem;">
+                <img src="static/images/5_n03452741_grand_piano.png" alt="n03452741_grand_piano"
+                style="height:200px; width:auto; object-fit:contain; margin-top:1rem;">
+              </div>
+              <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+                <span style="font-weight: bold; margin-bottom: 0.5rem;">Initial vector 1</span>
+                <img class="sync-gif" src="static/videos/ILSVRC2012_val_00005598_L_4_H_0_T_1834_1loop.gif"
+                alt="ILSVRC2012_val_00005598 TokenRank" style="height:200px; width:auto; object-fit:contain;">
+                <img class="sync-gif" src="static/videos/n03345487_fire_engine_L_8_H_3_T_1834_1loop.gif"
+                alt="n03345487_fire_engine TokenRank"
+                style="height:200px; width:auto; object-fit:contain; margin-top:1rem;">
+                <img class="sync-gif" src="static/videos/n03452741_grand_piano_L_4_H_2_T_1834_1loop.gif"
+                alt="n03452741_grand_piano TokenRank"
+                style="height:200px; width:auto; object-fit:contain; margin-top:1rem;">
+              </div>
+              <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+                <span style="font-weight: bold; margin-bottom: 0.5rem;">Initial vector 2</span>
+                <img class="sync-gif" src="static/videos/ILSVRC2012_val_00005598_L_4_H_0_T_2000_1loop.gif"
+                alt="ILSVRC2012_val_00005598 TokenRank T_2000" style="height:200px; width:auto; object-fit:contain;">
+                <img class="sync-gif" src="static/videos/n03345487_fire_engine_L_8_H_3_T_2000_1loop.gif"
+                alt="n03345487_fire_engine TokenRank T_2000"
+                style="height:200px; width:auto; object-fit:contain; margin-top:1rem;">
+                <img class="sync-gif" src="static/videos/n03452741_grand_piano_L_4_H_2_T_2000_1loop.gif"
+                alt="n03452741_grand_piano TokenRank T_2000"
+                style="height:200px; width:auto; object-fit:contain; margin-top:1rem;">
+              </div>
+              <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+                <span style="font-weight: bold; margin-bottom: 0.5rem;">Initial vector 3</span>
+                <img class="sync-gif" src="static/videos/ILSVRC2012_val_00005598_L_4_H_0_T_1000_1loop.gif"
+                alt="ILSVRC2012_val_00005598 TokenRank T_1000" style="height:200px; width:auto; object-fit:contain;">
+                <img class="sync-gif" src="static/videos/n03345487_fire_engine_L_8_H_3_T_1000_1loop.gif"
+                alt="n03345487_fire_engine TokenRank T_1000"
+                style="height:200px; width:auto; object-fit:contain; margin-top:1rem;">
+                <img class="sync-gif" src="static/videos/n03452741_grand_piano_L_4_H_2_T_1000_1loop.gif"
+                alt="n03452741_grand_piano TokenRank T_1000"
+                style="height:200px; width:auto; object-fit:contain; margin-top:1rem;">
+              </div>
+          <script>
+            // Synchronize GIFs by resetting their src on page load and every 7 seconds
+            function restartGifs() {
+            document.querySelectorAll('.sync-gif').forEach(function(img) {
+              var src = img.src;
+              img.src = '';
+              img.src = src;
+            });
+            }
+            // Restart GIFs on page load
+            window.addEventListener('DOMContentLoaded', function() {
+            restartGifs();
+            setInterval(restartGifs, 15000);
+            });
+          </script>
               </div>
             </div>
+            </div>
           </div>
-        </div>
       </div>
     </div>
   </section>
